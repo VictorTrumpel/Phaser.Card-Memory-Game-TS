@@ -36,7 +36,13 @@ export class Card extends GameObjects.Sprite {
   }
 
   openCard() {
+    this._isOpened = true
     this.setTexture('card' + this.id)
+  }
+
+  closeCard() {
+    this._isOpened = false
+    this.setTexture('card')
   }
 
 }
