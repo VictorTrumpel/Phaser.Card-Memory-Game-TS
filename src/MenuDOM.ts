@@ -37,14 +37,14 @@ export class MenuDOM {
 
   startTemplate = /*html*/`
     <div class='menu'>
-      ИГРА
+      <span>ИГРА</span>
       <button>НАЧАТЬ</button>
     </div>
   `
 
   winTemplate = /*html*/`
     <div class='menu'>
-      ПОБЕДА!
+      <span>ПОБЕДА!</span>
       <button>Играть снова!</button>
     </div>
   `
