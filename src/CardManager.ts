@@ -14,11 +14,11 @@ export class CardManager {
     this._scene = scene
   }
 
-  openCard(card: Card) {
+  async openCard(card: Card) {
     if (card.isOpened) 
       return
     
-    card.openCard()
+    await card.openCard()
 
     if (!this.prevOpenedCard) {
       this.prevOpenedCard = card
@@ -28,8 +28,10 @@ export class CardManager {
     if (this.prevOpenedCard.id === card.id) {
       this.guessedPairsCount += 1
     } else {
-      this.prevOpenedCard.closeCard()
-      card.closeCard()
+      Promise.all([
+        this.prevOpenedCard.closeCard(), 
+        card.closeCard()
+      ])
     }
 
     this.prevOpenedCard = null
@@ -59,8 +61,8 @@ export class CardManager {
     const cardWidth = cardTexture.width + cardMargin
     const cardHeight = cardTexture.height + cardMargin
 
-    const offsetX = (screenWidth - cardWidth * cols) / 2
-    const offsetY = (screenHeight - cardHeight * rows) / 2
+    const offsetX = (screenWidth - cardWidth * cols) / 2 + cardTexture.width / 2
+    const offsetY = (screenHeight - cardHeight * rows) / 2 + cardTexture.height / 2
 
     const rowsIds = Array.from({ length: rows }, (_, i) => i)
     const colsIds = Array.from({ length: cols }, (_, i) => i)
