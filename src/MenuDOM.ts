@@ -1,5 +1,5 @@
 
-type MenuRenderProps = { menuKind: 'start' } | { menuKind: 'end', isWin: boolean }
+type MenuRenderProps = { menuKind: 'start' | 'end',  isWin?: boolean}
 
 export class MenuDOM {
 
@@ -9,16 +9,12 @@ export class MenuDOM {
 
   onRestartGame: () => unknown
 
-  constructor() {
-
-  }
-
-  render({ menuKind }: MenuRenderProps) {
+  render({ menuKind, isWin }: MenuRenderProps) {
     const wrapper = document.createElement('div')
 
     wrapper.innerHTML = menuKind === 'start' 
       ? this.startTemplate
-      : this.winTemplate
+      : this.restartTemplate(Boolean(isWin))
 
     this._elemenetDOM = wrapper.firstElementChild as HTMLElement
 
@@ -42,13 +38,11 @@ export class MenuDOM {
     </div>
   `
 
-  winTemplate = /*html*/`
+  restartTemplate = (isWin: boolean) => /*html*/`
     <div class='menu'>
-      <span>ПОБЕДА!</span>
+      <span>${isWin ? 'ПОБЕДА!' : 'ПОРАЖЕНИЕ!'}</span>
       <button>Играть снова!</button>
     </div>
   `
-
-
 
 }

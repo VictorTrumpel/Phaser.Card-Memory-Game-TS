@@ -1,6 +1,6 @@
 import { Scene, Utils } from 'phaser'
-import { Card } from './prefabs/Card'
-import { CardPosition } from './prefabs/Card'
+import { Card } from './Card'
+import { CardPosition } from './Card'
 import gameSettings from './gameSettings'
 
 export class CardManager {
