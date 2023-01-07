@@ -1,12 +1,13 @@
-import { Scene, Utils } from 'phaser'
+import { Scene } from 'phaser'
 import { CardManager } from '../CardManager'
-import { Card, CardPosition } from '../prefabs/Card'
-import gameSettings from '../gameSettings'
-
+import { Card } from '../prefabs/Card'
 export class GameScene extends Scene {
 
-  private _isFinished = false
   private _cardManager: CardManager
+
+  onAllCardsOpen = () => {
+    this.scene.restart()
+  }
 
   onCardClicked = (_: unknown, card: unknown) => {
     if (card instanceof Card)
@@ -33,5 +34,6 @@ export class GameScene extends Scene {
 
   initEvents() {
     this.input.on('gameobjectdown', this.onCardClicked)
+    this._cardManager.onAllCardsOpen = this.onAllCardsOpen
   }
 }

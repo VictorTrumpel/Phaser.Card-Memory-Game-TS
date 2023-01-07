@@ -10,6 +10,8 @@ export class CardManager {
 
   public guessedPairsCount = 0
 
+  public onAllCardsOpen: () => void | null
+
   constructor(scene: Scene) {
     this._scene = scene
   }
@@ -33,6 +35,9 @@ export class CardManager {
         card.closeCard()
       ])
     }
+    
+    if (this.guessedPairsCount === gameSettings.cards.length)
+      this.onAllCardsOpen?.()
 
     this.prevOpenedCard = null
   }
