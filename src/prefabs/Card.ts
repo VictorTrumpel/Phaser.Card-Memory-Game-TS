@@ -33,33 +33,44 @@ export class Card extends GameObjects.Sprite {
     this.setInteractive()
   }
 
-  flip(): Promise<void> {
-    let animationResolver: (value: unknown) => void = () => null
-
-    const show = () => {
-      const texture = this.isOpened
-        ? 'card' + this.id
-        : 'card'
-
-      this.setTexture(texture)
+  move(x: number, y: number) {
+    return new Promise((animationResolver) =>
       this.scene.tweens.add({
         targets: this,
-        scaleX: 1,
         ease: 'Linear',
-        duration: 150,
+        x,
+        y,
+        duration: 250,
         onComplete: animationResolver
       })
-    }
+    )
+  }
 
-    this.scene.tweens.add({
-      targets: this,
-      scaleX: 0,
-      ease: 'Linear',
-      duration: 150,
-      onComplete: show
-    })
-
-    return new Promise((resolve) => animationResolver = resolve)
+  flip(): Promise<void> {
+    return new Promise((animationResolver) => {
+      const show = () => {
+        const texture = this.isOpened
+          ? 'card' + this.id
+          : 'card'
+  
+        this.setTexture(texture)
+        this.scene.tweens.add({
+          targets: this,
+          scaleX: 1,
+          ease: 'Linear',
+          duration: 150,
+          onComplete: animationResolver
+        })
+      }
+  
+      this.scene.tweens.add({
+        targets: this,
+        scaleX: 0,
+        ease: 'Linear',
+        duration: 150,
+        onComplete: show
+      })
+    })  
   }
 
   async openCard() {

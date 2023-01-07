@@ -37,18 +37,25 @@ export class CardManager {
     this.prevOpenedCard = null
   }
 
-  createCards() {
+  async createCards() {
     const cardsIds = gameSettings.cards
     const randomCardIds = Utils.Array.Shuffle([...cardsIds, ...cardsIds])
     const positions = this.getCardsPositions()
 
-    randomCardIds.forEach((cardId, idx) => {
-      const postion = positions[idx]
-      new Card(this._scene, {
-        ...postion,
-        id: cardId
+    let i = 0
+    for (const cardIdx of randomCardIds) {
+      const postion = positions[i]
+
+      const card = new Card(this._scene, {
+        x: 0,
+        y: 0, 
+        id: cardIdx
       })
-    })
+
+      await card.move(postion.x, postion.y)
+
+      i += 1
+    }
   }
 
   private getCardsPositions() {
