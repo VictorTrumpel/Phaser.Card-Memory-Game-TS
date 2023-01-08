@@ -7,6 +7,7 @@ const config: Types.Core.GameConfig = {
   type: Phaser.AUTO,
   width: gameSettings.screenWidth,
   height: gameSettings.screenHeight,
+  backgroundColor: '#6e6666',
   scene: [
     PreloadScene,
     GameScene

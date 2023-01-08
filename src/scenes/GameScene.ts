@@ -39,16 +39,14 @@ export class GameScene extends Scene {
   }
 
   create(data?: { isRestart?: boolean }) {
-    this.createBg()
-
     this._cardManager = new CardManager(this)
 
     this._menuDOM = new MenuDOM()
 
     this._timer = new Timer(this, {
       maxTime: 30,
-      x: 10, 
-      y: gameSettings.screenHeight / 2 
+      x: gameSettings.screenWidth / 2 - 55, 
+      y: 10 
     })
 
     data?.isRestart 
@@ -56,10 +54,6 @@ export class GameScene extends Scene {
       : this._menuDOM.render({ menuKind: 'start' })
   
     this.initEvents()
-  }
-
-  createBg() {
-    this.add.sprite(0, 0, 'bg').setOrigin(0, 0)
   }
 
   initEvents() {

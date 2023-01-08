@@ -6,7 +6,6 @@ import card2 from '../assets/card/card2.png'
 import card3 from '../assets/card/card3.png'
 import card4 from '../assets/card/card4.png'
 import card5 from '../assets/card/card5.png'
-import background from '../assets/bg/background.png'
 
 export class PreloadScene extends Scene {
 
@@ -15,7 +14,6 @@ export class PreloadScene extends Scene {
   }
 
   preload() {
-    this.load.image('bg', background)
     this.load.image('card', card)
     this.load.image('card1', card1)
     this.load.image('card2', card2)
