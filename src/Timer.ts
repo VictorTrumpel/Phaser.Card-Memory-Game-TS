@@ -25,6 +25,8 @@ export class Timer {
   }
 
   start() {
+    this._scene.time.paused = false
+    
     this._scene.time.addEvent({
       delay: 1000,
       callback: this.tick,
